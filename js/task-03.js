@@ -13,17 +13,16 @@ const images = [
   },
 ];
 
-const makeGalerryMarkup = image => {
-  const { url, alt } = image;
-  return `
+const imagesEl = document.querySelector('.gallery');
+imagesEl.style.display = 'flex';
+imagesEl.style.listStyle = 'none';
+
+const imagesListEl = images.map(({url,alt}) => 
+  `
   <li>
-    <img src = ${image.url} alt='${image.alt}'>
-  </li>
-  `;
-};
+    <img src = ${url} alt = ${alt} width = '320'/>
+  </li>`
+  )
+.join('');
 
-const listEl = document.querySelector('.gallery');
-
-const makeGalerry = images.map(makeGalerryMarkup).join('');
-
-listEl.insertAdjacentHTML("afterbegin", makeGalerry);
+imagesEl.insertAdjacentHTML("afterbegin", imagesListEl)
